@@ -1,1 +1,1 @@
-from . import config
+from . import my_config
