@@ -1,3 +1,2 @@
-from . import survey
-from . import calendar_handlers
-from . import cancel
+from . import history
+from . import hotels_search

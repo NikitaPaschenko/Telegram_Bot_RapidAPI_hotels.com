@@ -1,12 +1,10 @@
 from telebot.types import Message
 from loader import bot
-from utils.logger import logger
-from keyboards.inline.start_button import create_buttons_start
+from logs.loggers import func_logger
 
 
 @bot.message_handler(commands=['start'])
-def bot_start(message: Message):
-    logger.info(f'user_id: {message.from_user.id}')
-    bot.delete_state(message.from_user.id, message.chat.id)
-    bot.send_message(message.chat.id, 'Выберите действие',
-                     reply_markup=create_buttons_start())
+@func_logger
+def bot_start(message: Message) -> None:
+    bot.reply_to(message, f"Привет, {message.from_user.full_name}! Введите или выберите в меню команду, чтобы начать "
+                          f"работу с ботом!")

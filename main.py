@@ -1,16 +1,19 @@
+import os
+from telebot.custom_filters import StateFilter
+from loguru import logger
 from loader import bot
 import handlers
-from keyboards.inline.filter import bind_filters
 from utils.set_bot_commands import set_default_commands
-from telebot.custom_filters import StateFilter
-from utils.logger import logger
+from database.database import create_tables
 
 if __name__ == '__main__':
+    logger.add(os.path.join('logs', 'logs.log'),
+               format='{time} {level} {message}',
+               retention='2 days')
+    logger.debug('Запущен новый сеанс')
+
+    create_tables()
+
     bot.add_custom_filter(StateFilter(bot))
     set_default_commands(bot)
-    bind_filters(bot)
-    try:
-        bot.delete_webhook()
-    except Exception as exc:
-        logger.exception(exc)
     bot.infinity_polling()
