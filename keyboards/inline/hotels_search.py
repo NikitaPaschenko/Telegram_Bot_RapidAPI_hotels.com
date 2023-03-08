@@ -1,6 +1,6 @@
-from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+from telebot.types import InlineKeyboardMarkup
 from logs.loggers import func_logger
-
+from keyboa import Keyboa
 
 @func_logger
 def hotels_search_markup(hotels_search_id: int) -> InlineKeyboardMarkup:
@@ -9,13 +9,9 @@ def hotels_search_markup(hotels_search_id: int) -> InlineKeyboardMarkup:
     :param hotels_search_id: id поиска отелей
     :return: клавиатура для отображения результатов поиска
     """
-    return InlineKeyboardMarkup(
-        keyboard=[
-            [
-                InlineKeyboardButton(
-                    text='Показать результаты поиска',
-                    callback_data=str(hotels_search_id)
-                )
-            ]
-        ]
-    )
+    return Keyboa(
+        items={
+            "text": 'Показать результаты поиска',
+            "callback_data": str(hotels_search_id),
+        }
+    ).keyboard
