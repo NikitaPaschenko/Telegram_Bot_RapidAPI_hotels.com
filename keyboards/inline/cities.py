@@ -1,7 +1,7 @@
 from typing import Dict
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from logs.loggers import func_logger
-
+from keyboa import Keyboa
 
 @func_logger
 def city_markup(cities: Dict[str, str]) -> InlineKeyboardMarkup:
@@ -10,14 +10,5 @@ def city_markup(cities: Dict[str, str]) -> InlineKeyboardMarkup:
     :param cities: список городов
     :return: клавиатура с городами
     """
-    return InlineKeyboardMarkup(
-        keyboard=[
-            [
-                InlineKeyboardButton(
-                    text=city,
-                    callback_data=city_id
-                )
-            ]
-            for city_id, city in cities.items()
-        ]
-    )
+    cities_items = [(city, city_id) for city_id, city in cities.items()]
+    return Keyboa(items=cities_items).keyboard
