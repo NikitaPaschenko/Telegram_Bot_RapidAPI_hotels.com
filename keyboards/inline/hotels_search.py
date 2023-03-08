@@ -12,6 +12,6 @@ def hotels_search_markup(hotels_search_id: int) -> InlineKeyboardMarkup:
     return Keyboa(
         items={
             "text": 'Показать результаты поиска',
-            "callback_data": hotels_search_id,
+            "callback_data": str(hotels_search_id),
         }
     ).keyboard
